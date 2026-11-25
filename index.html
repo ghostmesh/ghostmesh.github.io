@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои проекты</title>
+    <style>
+        :root {
+            --text: #ffffff;
+            --muted: #cbd5e1;
+            --accent: #c77dff;      
+            --accent-2: #ff6b6b; /* Чистый кораллово-розовый */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 48px 20px 32px;
+            overflow-x: hidden;
+            position: relative;
+            background-color: #12101d; 
+        }
+
+        /* 🌊 ФОН: ЧИСТАЯ СМЕСЬ РОЗОВОГО И ОРАНЖЕВОГО */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -50%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 50% 15%, #ff5e62 0%, transparent 35%),  /* Чистый розово-оранжевый (верх) */
+                radial-gradient(circle at 85% 35%, #5a189a 0%, transparent 35%),  /* Фиолетовый */
+                radial-gradient(circle at 85% 85%, #1e40af 0%, transparent 35%),  /* Синий */
+                radial-gradient(circle at 50% 85%, #ff7e5f 0%, transparent 35%),  /* Сочный коралловый (низ) */
+                radial-gradient(circle at 15% 85%, #3b0764 0%, transparent 35%),  /* Пурпурный */
+                radial-gradient(circle at 15% 35%, #ff9966 0%, transparent 35%);  /* Тёплый мандариново-розовый */
+            background-color: #12101d;
+            animation: waveAnimation 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes waveAnimation {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            33% { transform: translate(5%, -5%) scale(1.1) rotate(2deg); }
+            66% { transform: translate(-5%, 5%) scale(0.95) rotate(-2deg); }
+            100% { transform: translate(0, 0) scale(1.05) rotate(0deg); }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+            animation: fadeUp 0.8s ease both;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: #ffffff;
+            margin-bottom: 12px;
+            text-shadow: 0 4px 24px rgba(0, 0, 0, 0.8); 
+        }
+
+        header p {
+            color: var(--muted);
+            font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+            z-index: 1;
+        }
+
+        /* 💎 ТЕМНОЕ СТЕКЛО */
+        .card {
+            position: relative;
+            background: linear-gradient(
+                135deg, 
+                rgba(20, 20, 30, 0.45) 0%, 
+                rgba(20, 20, 30, 0.15) 100%
+            );
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                inset 0 1px 1px rgba(255, 255, 255, 0.2),
+                0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            border-radius: 16px;
+            padding: 26px 24px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            animation: fadeUp 0.8s ease both;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.10s; }
+        .card:nth-child(2) { animation-delay: 0.20s; }
+        .card:nth-child(3) { animation-delay: 0.30s; }
+
+        /* Блик (чистый розово-оранжевый градиент) */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(
+                120deg, 
+                transparent 0%, 
+                rgba(90, 24, 154, 0.7) 20%,    /* Фиолетовый */
+                rgba(255, 94, 98, 0.8) 40%,    /* Чистый розово-оранжевый */
+                rgba(255, 126, 95, 0.8) 60%,   /* Коралловый */
+                rgba(30, 64, 175, 0.7) 80%,    /* Синий */
+                transparent 100%
+            );
+            transform: skewX(-25deg);
+            transition: left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            pointer-events: none;
+        }
+
+        .card:hover::before {
+            left: 150%;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 94, 98, 0.8); /* Розово-оранжевая рамка */
+            box-shadow: 
+                inset 0 1px 1px rgba(255, 255, 255, 0.3),
+                0 12px 40px rgba(255, 94, 98, 0.5); /* Розово-оранжевое свечение */
+        }
+
+        .card:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        .card h2 {
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h2 .icon {
+            color: var(--accent);
+            font-size: 1.1rem;
+            transition: transform 0.25s ease, color 0.25s ease;
+        }
+
+        .card:hover h2 .icon {
+            transform: translateX(4px) rotate(-8deg);
+            color: #ff5e62;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        .card .arrow {
+            margin-top: 18px;
+            font-size: 0.9rem;
+            color: var(--accent);
+            opacity: 0;
+            transform: translateX(-6px);
+            transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
+        }
+
+        .card:hover .arrow {
+            opacity: 1;
+            transform: translateX(0);
+            color: #ff5e62;
+        }
+
+        footer {
+            margin-top: 56px;
+            color: var(--muted);
+            font-size: 0.9rem;
+            animation: fadeUp 0.8s ease both;
+            animation-delay: 0.4s;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-2);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 32px 16px 24px; }
+            .projects { grid-template-columns: 1fr; }
+            .card .arrow { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Мои проекты</h1>
+        <p>Ссылки на проекты</p>
+    </header>
+
+    <main class="projects">
+        <a class="card" href="https://ghostmesh.github.io/messmemes_client/" target="_blank" rel="noopener">
+            <h2><span class="icon">◆</span>Messmemes</h2>
+            <p>Игра с мемами</p>
+            <span class="arrow">Перейти →</span>
+        </a>
+    </main>
+
+    <footer>
+        <p>© 2026 · <a href="https://github.com/ghostmesh">Мой GitHub</a></p>
+    </footer>
+</body>
+</html>
